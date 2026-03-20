@@ -6,12 +6,12 @@ pluginManagement {
     }
 }
 
-dependencyResolution {
+dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        // Repository DJI SDK
-        maven { url = uri("https://terra-1-g.djicdn.com/repo/") }
+        // Repository officiel DJI SDK
+        maven { url = uri("https://developer.dji.com/maven2") }
     }
 }
 

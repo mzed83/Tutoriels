@@ -110,6 +110,37 @@
             android:textSize="16sp" />
     </LinearLayout>
 
+    <!-- ============ BOUTONS VOL (bas gauche) ============ -->
+    <LinearLayout
+        android:id="@+id/panelFlight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Bouton Decollage -->
+        <Button
+            android:id="@+id/btnTakeoff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:backgroundTint="#FFFF9800"
+            android:text="Decollage"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16sp" />
+
+        <!-- Bouton Atterrissage -->
+        <Button
+            android:id="@+id/btnLand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFF44336"
+            android:text="Atterrissage"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16sp" />
+    </LinearLayout>
+
     <!-- ============ BOUTONS CAMERA (bas droite) ============ -->
     <LinearLayout
         android:id="@+id/panelCamera"

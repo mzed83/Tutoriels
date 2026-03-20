@@ -14,14 +14,11 @@ import dji.sdk.keyvalue.key.CameraKey
 import dji.sdk.keyvalue.key.FlightControllerKey
 import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.value.camera.CameraMode
-import dji.sdk.keyvalue.value.camera.PhotoFileFormat
-import dji.sdk.keyvalue.value.camera.ShootPhotoMode
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.sdk.keyvalue.value.common.LocationCoordinate3D
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.KeyManager
-import dji.v5.manager.datacenter.camera.CameraStreamManager
 
 /**
  * Activite principale - Telemetrie et controle camera du DJI Mini 4 Pro.
@@ -93,6 +90,16 @@ class MainActivity : AppCompatActivity() {
             } else {
                 startRecordVideo()
             }
+        }
+
+        // Bouton decollage
+        binding.btnTakeoff.setOnClickListener {
+            takeoff()
+        }
+
+        // Bouton atterrissage
+        binding.btnLand.setOnClickListener {
+            land()
         }
     }
 
@@ -319,6 +326,70 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onFailure(error: IDJIError) {
                     Log.e(TAG, "Erreur arret video: ${error.description()}")
+                }
+            }
+        )
+    }
+
+    // =========================================================================
+    // CONTROLE DE VOL
+    // =========================================================================
+
+    /**
+     * Decollage automatique.
+     * Le drone monte a environ 1.2m et se stabilise en vol stationnaire.
+     */
+    private fun takeoff() {
+        val takeoffKey = KeyTools.createKey(FlightControllerKey.KeyStartTakeoff)
+        KeyManager.getInstance().performAction(
+            takeoffKey,
+            object : CommonCallbacks.CompletionCallbackWithParam<Any> {
+                override fun onSuccess(data: Any?) {
+                    runOnUiThread {
+                        Toast.makeText(this@MainActivity, "Decollage !", Toast.LENGTH_SHORT).show()
+                    }
+                    Log.i(TAG, "Decollage reussi")
+                }
+
+                override fun onFailure(error: IDJIError) {
+                    Log.e(TAG, "Erreur decollage: ${error.description()}")
+                    runOnUiThread {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Erreur decollage: ${error.description()}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        )
+    }
+
+    /**
+     * Atterrissage automatique.
+     * Le drone descend lentement et se pose.
+     */
+    private fun land() {
+        val landKey = KeyTools.createKey(FlightControllerKey.KeyStartAutoLanding)
+        KeyManager.getInstance().performAction(
+            landKey,
+            object : CommonCallbacks.CompletionCallbackWithParam<Any> {
+                override fun onSuccess(data: Any?) {
+                    runOnUiThread {
+                        Toast.makeText(this@MainActivity, "Atterrissage...", Toast.LENGTH_SHORT).show()
+                    }
+                    Log.i(TAG, "Atterrissage demarre")
+                }
+
+                override fun onFailure(error: IDJIError) {
+                    Log.e(TAG, "Erreur atterrissage: ${error.description()}")
+                    runOnUiThread {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Erreur: ${error.description()}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         )

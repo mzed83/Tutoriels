@@ -58,10 +58,18 @@ dependencies {
     // ============================================
     // DJI Mobile SDK v5 (MSDK v5)
     // ============================================
-    // SDK principal
-    implementation("com.dji:dji-sdk-v5-aircraft:5.9.0")
-    compileOnly("com.dji:dji-sdk-v5-aircraft-provided:5.9.0")
+    // SDK principal (version 5.17.0 - derniere version stable)
+    implementation("com.dji:dji-sdk-v5-aircraft:5.17.0")
+    compileOnly("com.dji:dji-sdk-v5-aircraft-provided:5.17.0")
 
     // Necessite le network SDK pour la connexion
-    implementation("com.dji:dji-sdk-v5-networkImp:5.9.0")
+    implementation("com.dji:dji-sdk-v5-networkImp:5.17.0")
+
+    // Dependencies requises par le SDK DJI
+    implementation("com.squareup.okhttp3:okhttp:3.14.9")
+    implementation("com.squareup.okio:okio:1.17.2")
+    implementation("com.squareup.wire:wire-runtime:2.2.0")
+    implementation("com.google.code.gson:gson:2.9.1")
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation("net.zetetic:android-database-sqlcipher:4.5.0")
 }
