@@ -182,3 +182,6 @@ https://www.youtube.com/watch?v=HHv_V2PkZGQ
 ### Parlons actuator, odrive, moteur ...
 https://www.youtube.com/watch?v=Mg-KiG3Rq2Q
 
+### DJI Mini 4 Pro: Programme simple avec le DJI Mobile SDK v5
+Application Android (Kotlin) pour se connecter au Mini 4 Pro, afficher la telemetrie (batterie, GPS, altitude, vitesse) et controler la camera (photo/video).
+
